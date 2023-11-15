@@ -1,6 +1,6 @@
 class VignereController < ApplicationController
     
-    # before_action :authenticate_user!
+    before_action :authenticate_user!, only: [:index, :encode, :decode]
     
     def index
         
