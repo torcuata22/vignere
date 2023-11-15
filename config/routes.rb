@@ -3,4 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "welcome#index"
+  get 'vignere/index'
+  get 'vignere/encode'
+  get 'vignere/decode'
 end
