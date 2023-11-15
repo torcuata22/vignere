@@ -36,6 +36,9 @@ gem 'bootstrap', '~> 5.3.2'
 #jquery: 
 gem 'jquery-rails'
 
+#devise: 
+gem 'devise', '~> 4.9', '>= 4.9.3'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
