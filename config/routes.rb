@@ -13,10 +13,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  # get 'login', to: 'sessions#new'
+  # post 'login', to: 'sessions#create'
+  # delete 'logout', to: 'sessions#destroy'
 
   resources :users, only: [:new, :create]
+  post 'vignere/encode', to: 'vignere#encode', as: 'encode_vignere'
 
 end

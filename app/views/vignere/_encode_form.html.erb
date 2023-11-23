@@ -1,0 +1,16 @@
+<%= form_with(model: @vign, url: encode_vignere_index_path, local: true, data: { turbo: false }) do |f| %>
+                <div class="row form-group">
+                    <%= f.label :to_encode, "Text to encode", class:"col-2 col-form-label form-label-text fw-bold" %>
+                    <div class="col-10">
+                        <%= f.text_area :to_encode, rows:10, class:"form-control shadow", placeholder:"Text to encode" %>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <%= f.label :key, "Encryption Key", class:"col-2 col-form-label form-label-text fw-bold" %><br>
+                    <div class="col-10 mb-4">
+                        <%= f.text_field :key, class:"form-control mt-3 shadow",placeholder:"Enter your encryption key" %>
+                    </div>                    
+                </div>
+        <%= f.submit "Encode", class: "btn btn-outline-success" %>
+<% end %>
