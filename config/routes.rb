@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     collection do
       get :encode
       get :decode
+      post :decode
     end
   end
 

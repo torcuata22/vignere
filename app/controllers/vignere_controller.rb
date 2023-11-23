@@ -20,21 +20,30 @@ class VignereController < ApplicationController
 
         end
         puts "Params: #{params.inspect}, Original Text: #{@original_text}, Key: #{@vign.key}, Encoded Text: #{@vign.to_decode}"
-
     end
+
 
     def decode
-      encoded_text = params[:vign][:to_decode] if params[:vign].present?
-      key = params[:vign][:key]
-      if encoded_text.present?
-        @decoded_text = perform_decoding(encoded_text, key)
-        render :decode
+        @vign = Vign.new
+        encoded_text = params.dig(:vign, :to_decode)
+        key = params.dig(:vign, :key)
+
+        if encoded_text.present?
+          @vign.to_decode = perform_decoding(encoded_text, key)
+          @decoded_text = @vign.to_decode
+          flash[:success] = 'Text decoded successfully!'
+          render :decode
+        else
+
+          render :decode
+        end
       end
-end
 
 
 
-    end
+
+
+
 
     private
 
@@ -72,32 +81,44 @@ end
         encoded_text
     end
 
+
     def perform_decoding(encoded_text, key)
+        puts "Received encoded text: #{encoded_text}"
+        puts "Received key: #{key}"
+
         text_length = encoded_text.length
-        rep_factor = text_length/key.length
+        rep_factor = text_length / key.length
         remainder = text_length % key.length
 
         final_dec_key = key * rep_factor + key[0...remainder]
         dec_key_arr = key.upcase.chars
-        puts "Text: #{text}, Enc key: #{final_dec_key}"
 
         upper_alphabet = ('A'..'Z').to_a
         alphabet = upper_alphabet
 
         decoded_text = ""
-        encoded_text.each_char.with_index do |char, index|
 
-        if alphabet.include?(char.upcase)
+        encoded_text.each_char.with_index do |char, index|
+          if alphabet.include?(char.upcase)
             key_char_dec = dec_key_arr[index % dec_key_arr.length].upcase
             key_position_dec = alphabet.index(key_char_dec.upcase)
             input_char_dec = char.upcase
             input_position_dec = alphabet.index(input_char_dec)
             decrypted_char = alphabet[(input_position_dec - key_position_dec) % 26]
+
+            puts "Decrypted char: #{decrypted_char}"
+
             decoded_text << decrypted_char
-        else
+          else
             decoded_text << char
+          end
         end
+
+        puts "Decoded text: #{decoded_text}"
+        decoded_text
     end
+
+
 
 
 end

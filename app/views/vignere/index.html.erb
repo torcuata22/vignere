@@ -1,1 +1,53 @@
-<h1>What is a Vignere cipher?</h1>
+<h1>About the Vingnere Cipher</h1>
+<div class="container mt-4">
+<h3>What is a Vignere cipher?</h3>
+<p>The Vigenère Cipher is a fascinating encryption method that adds complexity to the art of securing messages.
+ Developed in the 16th century, this cryptographic technique employs a polyalphabetic substitution to encode 
+ text. Unlike simple substitution ciphers, the Vigenère Cipher uses a keyword or keyphrase, making it more 
+ resistant to traditional cryptographic attacks.</p>  
+
+<h3>A brief History</h3>
+<p>The Vigenère Cipher owes its name to Blaise de Vigenère, a French diplomat and cryptographer, 
+who played a crucial role in popularizing and explaining the cipher. Although the concept predates Vigenère, 
+his contributions solidified its place in cryptographic history.</p>
+
+<p>The origins of the Vigenère Cipher can be traced back to Giovan Battista Bellaso, an Italian cryptographer, 
+who introduced the idea of using a keyword to shift the alphabetic substitution in the mid-16th century. 
+However, it was Vigenère's work that brought attention to this elegant method of encryption.</p>  
+
+
+<h3>How does it work?</h3>
+<p>At its core, the Vigenère Cipher operates by using a keyword to determine the shift for each 
+letter in a message. Here's a step-by-step breakdown:</p>  
+<ol>
+<li>
+<strong>Keyword Selection:</strong>The sender chooses a keyword, a word or phrase that will dictate 
+the encryption process.
+</li>
+
+<li>
+<strong>Keyword Repetition:</strong>The keyword is repeated to match the length of the message. 
+Each letter in the keyword corresponds to a shift value for the respective letter in the message.
+</li>
+<li><strong>Encryption:</strong>For each letter in the message, the Vigenère Cipher shifts the letter 
+according to the corresponding letter in the keyword. This creates a ciphertext that is more secure than 
+simple substitution ciphers.</li>
+</ol>
+<p>The polyalphabetic nature of the Vigenère Cipher introduces complexity and adds a layer of security by 
+breaking the predictable patterns found in monoalphabetic ciphers. It remains an intriguing piece of 
+cryptographic history, showcasing the ingenuity of early cryptographers.</p>
+
+<h3>Learn More</h3>
+<p>If you want to delve deeper into the Vignere Cipher, you can start by checking out these resources:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher" target="blank">Wikipedia: The Vigenère Cipher</a></li>
+<li><a href="https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/the-vigenere-cipher-cryptanalysis" target="blank">Khan Academy: Vigenère Cipher</a></li>
+<li><a href="https://www.youtube.com/watch?v=RCkGauRMs2A" target="blank">The Vigenère Cipher</a></li>
+</ul>
+<h3>Get Started!</h3>
+<p>Ready to explore the secrets of the Vigenère Cipher?   
+<%= link_to 'Login', new_user_session_path %> or 
+<%= link_to 'Register', new_user_registration_path %>
+and start creating your own encrypted messages
+</p>
+</div>

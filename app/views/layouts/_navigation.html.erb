@@ -18,15 +18,17 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <% if current_user %>
-                <%= current_user.email %>
+                Hello, <%= current_user.email %>
               <% else %>
                 Account
               <% end %>
             </a>
             <ul class="dropdown-menu">
               <% if current_user %>
+                <li><%= link_to 'About', vignere_index_path, class: 'dropdown-item' %></li>
                 <li><%= link_to 'Encode', encode_vignere_index_path, class: 'dropdown-item' %></li>
                 <li><%= link_to 'Decode', decode_vignere_index_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'Play the Game', vignere_index_path, class: 'dropdown-item' %></li>
                 <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
               <% else %>
                 <li><%= link_to 'Login', new_user_session_path, class: 'dropdown-item' %></li>
