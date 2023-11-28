@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :caesar, only: [:index]  do
     collection do
       get :encode
+      post :encode
       get :decode
       post :decode
     end
