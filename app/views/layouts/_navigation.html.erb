@@ -1,47 +1,63 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    
-      <div class="d-flex justify-content-between align-items-center w-100">
-      <%= link_to root_path, class: "navbar-brand" do %>
+  <div class="d-flex justify-content-between align-items-center w-100">
+    <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag("logo.jpg", alt: "Logo", height: "300", class: 'p-0') %>
     <% end %>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <%= link_to "Home", root_path, class: "nav-link mx-2" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "About", about_path, class: "nav-link mx-2" %>
-          </li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class: "nav-link mx-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "About", about_path, class: "nav-link mx-2" %>
+        </li>
+        <!-- First dropdown for login/registration/logout -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <% if current_user %>
+              Hello, <%= current_user.email %>
+            <% else %>
+              Account
+            <% end %>
+          </a>
+          <ul class="dropdown-menu">
+            <% if current_user %>
+              <li><%= link_to 'Logout', destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %></li>
+            <% else %>
+              <li><%= link_to 'Login', new_user_session_path, class: 'dropdown-item' %></li>
+              <li><%= link_to 'Register', new_user_registration_path, class: 'dropdown-item' %></li>
+            <% end %>
+          </ul>
+        </li>
+        <!-- Second and third dropdown for ciphers and options after login -->
+        
+        <% if current_user %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <% if current_user %>
-                Hello, <%= current_user.email %>
-              <% else %>
-                Account
-              <% end %>
+              Caesar Cipher
             </a>
             <ul class="dropdown-menu">
-              <% if current_user %>
-                <li><%= link_to 'About', vignere_index_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Encode', encode_vignere_index_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Decode', decode_vignere_index_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Play the Game', vignere_index_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-              <% else %>
-                <li><%= link_to 'Login', new_user_session_path, class: 'dropdown-item' %></li>
-                <li><%= link_to 'Register', new_user_registration_path, class: 'dropdown-item' %></li>
-              <% end %>
+              <li class="nav-item"><%= link_to 'About Caesar Cipher', caesar_index_path, class: 'dropdown-item' %></li>
+              <li class="nav-item"><%= link_to 'Encode', encode_caesar_index_path, class: 'dropdown-item' %></li>
+              <li class="nav-item"><%= link_to 'Decode', decode_caesar_index_path, class: 'dropdown-item' %></li>
+              <li class="nav-item"><%= link_to 'Play the Game', caesar_index_path, class: 'dropdown-item' %></li>
             </ul>
-         </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+        </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Vignere Cipher</a>
+            <ul class="dropdown-menu">
+              <li class="nav-item"><%= link_to 'About Vignere Cipher', vignere_index_path, class: 'dropdown-item' %></li>
+              <li class="nav-item"><%= link_to 'Encode', encode_vignere_index_path, class: 'dropdown-item' %></li>
+              <li class="nav-item"><%= link_to 'Decode', decode_vignere_index_path, class: 'dropdown-item' %></li>
+              <li class="nav-item"><%= link_to 'Play the Game', vignere_index_path, class: 'dropdown-item' %></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+      
     </div>
-
-  </nav>
+  </div>
+</nav>
