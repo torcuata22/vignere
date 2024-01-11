@@ -14,50 +14,30 @@
         <li class="nav-item">
           <%= link_to "About", about_path, class: "nav-link mx-2" %>
         </li>
-        <!-- First dropdown for login/registration/logout -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <% if current_user %>
-              Hello, <%= current_user.email %>
-            <% else %>
-              Account
-            <% end %>
-          </a>
-          <ul class="dropdown-menu">
-            <% if current_user %>
-              <li><%= link_to 'Logout', destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %></li>
-            <% else %>
-              <li><%= link_to 'Login', new_user_session_path, class: 'dropdown-item' %></li>
-              <li><%= link_to 'Register', new_user_registration_path, class: 'dropdown-item' %></li>
-            <% end %>
-          </ul>
+        <!-- User authentication -->
+        <li class="nav-item">
+          <% if current_user %>
+            <%= link_to 'Logout', destroy_user_session_path, class: "nav-link mx-2", data: { turbo_method: :delete } %>
+          <% else %>
+            <%= link_to 'Login', new_user_session_path, class: 'nav-link mx-2' %>
+            
+          <% end %>
         </li>
-        <!-- Second and third dropdown for ciphers and options after login -->
-        
+        <!-- Ciphers dropdown -->
         <% if current_user %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Caesar Cipher
+              Ciphers
             </a>
             <ul class="dropdown-menu">
-              <li class="nav-item"><%= link_to 'About Caesar Cipher', caesar_index_path, class: 'dropdown-item' %></li>
-              <li class="nav-item"><%= link_to 'Encode', encode_caesar_index_path, class: 'dropdown-item' %></li>
-              <li class="nav-item"><%= link_to 'Decode', decode_caesar_index_path, class: 'dropdown-item' %></li>
-              <li class="nav-item"><%= link_to 'Play the Game', caesar_index_path, class: 'dropdown-item' %></li>
-            </ul>
-        </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Vignere Cipher</a>
-            <ul class="dropdown-menu">
-              <li class="nav-item"><%= link_to 'About Vignere Cipher', vignere_index_path, class: 'dropdown-item' %></li>
-              <li class="nav-item"><%= link_to 'Encode', encode_vignere_index_path, class: 'dropdown-item' %></li>
-              <li class="nav-item"><%= link_to 'Decode', decode_vignere_index_path, class: 'dropdown-item' %></li>
-              <li class="nav-item"><%= link_to 'Play the Game', vignere_index_path, class: 'dropdown-item' %></li>
+              <!-- Add links for each cipher -->
+              <li class="nav-item"><%= link_to 'Caesar Cipher', caesar_index_path, class: 'dropdown-item' %></li>
+              <li class="nav-item"><%= link_to 'Vigenere Cipher', vignere_index_path, class: 'dropdown-item' %></li>
+              <li class="nav-item"><%= link_to 'Bacon Cipher', bacon_index_path, class: 'dropdown-item' %></li>
             </ul>
           </li>
         <% end %>
       </ul>
-      
     </div>
   </div>
 </nav>

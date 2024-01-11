@@ -6,19 +6,37 @@
     <title>Ciphers</title>
 </head>
 <body>
-    <h1 class="">Welcome! What would you like to do?</h1>
-    <h3>Learn about the Caesar Cipher</h3>
-    <h3>Learn about Vignere's Cipher</h3>
-    <h3>Learn about The Playfair Cipher</h3>
-    <h3>Learn about The Enigma Machine</h3>
-    <h2>Learn about Elliptic Curve Cryptography</h3>
-    <h3>Learn about AES</h3>
-    <h3>Learn about Hybrid Cryptosystems</h3>
-    <h3>Learn about the Diffie-Hellman algorithm</h3>
-    <h3>Learn about RSA</h3>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to CipherCraft!</title>
+  <!-- Add your stylesheets and other head elements here -->
+</head>
+<body>
+
+  <div class="container mt-4">
+    <h1>Welcome to CipherHub!</h1>
+
+    <p>Explore the fascinating world of ciphers and encryption with CipherCraft, your interactive platform for hands-on learning and experimentation. Ciphers have played a pivotal role throughout history, serving as the guardians of secrets and the keys to secure communication.</p>
+
+    <p>In an era where information is paramount, understanding encryption becomes essential. CipherCraft empowers you to delve into the art of coding and decoding messages, unlocking the mysteries behind various cryptographic techniques.</p>
+
+    <p>Whether you're a cryptography enthusiast or a curious learner, CipherCraft offers a range of ciphers to experiment with. From the classical Caesar Cipher to the modern twists of the Bacon Cipher and the intricate patterns of the Vigenère Cipher, each cryptographic method tells a story of its own.</p>
+
+    <p>Take a journey through time, exploring the historical significance of these ciphers and discovering how they evolved to meet the challenges of their eras. CipherCraft is not just a website; it's an interactive guide that encourages you to play, learn, and master the art of encryption.</p>
+
+    <p>Start your cryptographic adventure now! Choose a cipher, encode and decode messages, and unlock the secrets hidden within the world of ciphers. CipherCraft invites you to immerse yourself in the magic of encryption and unravel the mysteries one key at a time.</p>
+  </div>
+   <%= link_to "Baconian Cipher", bacon_index_path, class:"btn btn-dark btn-lg" %>
+   <%= link_to "Caesar Cipher", caesar_index_path, class:"btn btn-dark btn-lg" %>
+   <%= link_to "Vignere Cipher", vignere_index_path, class:"btn btn-dark btn-lg" %>
+   
 
 
-    <h2></h2>
-    <h2></h2>
+</body>
+</html>
+
 </body>
 </html>

@@ -1,1 +1,37 @@
-<h1>ABout the Caesar Cipher</h1>
+
+<%= link_to "Encode", encode_caesar_index_path, class:"btn btn-dark btn-lg" %>
+<%= link_to "Decode", decode_caesar_index_path, class:"btn btn-dark btn-lg" %>
+PLAY
+
+<h1 class="mt-5">About the Caesar Cipher</h1>
+<div class="container mt-4">
+  <h3>What is a Caesar cipher?</h3>
+  <p>The Caesar Cipher, named after Julius Caesar who reportedly used it to secure his private correspondence, is one of the simplest and oldest encryption techniques. It falls under the category of substitution ciphers, where each letter in the plaintext is shifted a certain number of places down or up the alphabet.</p>
+
+  <h3>A brief History</h3>
+  <p>The Caesar Cipher dates back to ancient Rome and is said to have been regularly employed by Julius Caesar for military communications. The method involves shifting each letter by a fixed number of positions, known as the "key" or "shift."</p>
+
+  <h3>How does it work?</h3>
+  <p>The Caesar Cipher operates by shifting each letter in the plaintext by a fixed number of positions. Here's a step-by-step breakdown:</p>
+  <ol>
+    <li><strong>Key Selection:</strong> The sender chooses a shift value (key) that determines the amount each letter will be shifted.</li>
+    <li><strong>Shift:</strong> Each letter in the plaintext is shifted by the chosen key. For example, with a key of 3, 'A' becomes 'D,' 'B' becomes 'E,' and so on.</li>
+    <li><strong>Decryption:</strong> To decrypt the message, one simply reverses the process by shifting each letter in the ciphertext in the opposite direction.</li>
+  </ol>
+  <p>The Caesar Cipher is a straightforward encryption method, but it demonstrates the fundamental principles of encryption and has historical significance.</p>
+
+  <h3>Learn More</h3>
+  <p>If you want to delve deeper into the Caesar Cipher, you can start by checking out these resources:</p>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Caesar_cipher" target="_blank">Wikipedia: The Caesar Cipher</a></li>
+    <li><a href="https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/caesar-cipher" target="_blank">Khan Academy: Caesar Cipher</a></li>
+  </ul>
+</div>
+
+<br>
+
+<h4>Ready to try it?</h4>
+
+<%= link_to "Encode", encode_caesar_index_path, class:"btn btn-dark btn-lg" %>
+<%= link_to "Decode", decode_caesar_index_path, class:"btn btn-dark btn-lg" %>
+PLAY
