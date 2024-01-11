@@ -1,0 +1,14 @@
+<h1>Encode your text</h1>
+
+<p>Enter the code you would like to encode in the box below</p>
+
+<%= render 'encode_form' %>
+
+<% if @encoded_text.present? %>
+<div class="card my-5">
+    <div class="card-body my-2">
+      <p class='card-title fw-bold'>Here is your encoded text:</p>
+      <p class='card-text fs-5'><%= @encoded_text %></p>
+    </div>
+  </div>
+<% end %>

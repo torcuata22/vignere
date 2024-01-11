@@ -1,0 +1,10 @@
+<%= form_with(model: @bacon, url: encode_bacon_index_path, local: true, data: { turbo: false }) do |f| %>
+                <div class="row form-group">
+                    <%= f.label :to_encode, "Text to encode", class:"col-2 col-form-label form-label-text fw-bold" %>
+                    <div class="col-10">
+                        <%= f.text_area :to_encode, rows:10, class:"form-control shadow", placeholder:"Text to encode" %>
+                    </div>
+                </div>
+
+        <%= f.submit "Encode", class: "btn btn-outline-success" %>
+<% end %>
