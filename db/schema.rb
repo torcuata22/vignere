@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_09_192959) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_11_015348) do
+  create_table "bacons", force: :cascade do |t|
+    t.string "to_encode"
+    t.string "to_decode"
+    t.string "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_bacons_on_user_id"
+  end
+
   create_table "caesars", force: :cascade do |t|
     t.string "to_encode"
     t.string "to_decode"
@@ -19,16 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_09_192959) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_caesars_on_user_id"
-  end
-
-  create_table "playfairs", force: :cascade do |t|
-    t.string "to_encode"
-    t.string "to_decode"
-    t.string "key"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_playfairs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,7 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_09_192959) do
     t.index ["user_id"], name: "index_vigns_on_user_id"
   end
 
+  add_foreign_key "bacons", "users"
   add_foreign_key "caesars", "users"
-  add_foreign_key "playfairs", "users"
   add_foreign_key "vigns", "users"
 end

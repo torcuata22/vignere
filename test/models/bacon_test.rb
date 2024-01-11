@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PlayfairTest < ActiveSupport::TestCase
+class BaconTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

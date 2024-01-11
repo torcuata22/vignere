@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_many :vigns
   has_many :caesars
-  has_many :playfairs
+  has_many :bacons
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
