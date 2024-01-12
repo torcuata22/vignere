@@ -32,6 +32,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :xor, only: [:index]  do
+    collection do
+      get :encode
+      post :encode
+      get :decode
+      post :decode
+    end
+  end
+
 
   # get 'login', to: 'sessions#new'
   # post 'login', to: 'sessions#create'

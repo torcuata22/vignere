@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-  has_many :vigns
-  has_many :caesars
-  has_many :bacons
+  has_many :vigns, dependent: :destroy
+  has_many :caesars, dependent: :destroy
+  has_many :bacons, dependent: :destroy
+  has_many :xors, dependent: :destroy
 
 
   # Include default devise modules. Others available are:
