@@ -65,7 +65,8 @@ class BaconController < ApplicationController
       '11000' => 'Y', '11001' => 'Z'
     }
 
-    decoded_segments = encoded_text.scan(/.{5}/)
+    encoded_text_without_spaces = encoded_text.gsub(/\s+/, '')
+    decoded_segments = encoded_text_without_spaces.scan(/.{5}/)
     puts "Decoded segments: #{decoded_segments}"
 
   decoded_text = decoded_segments.map { |segment| bacon_map[segment] || segment }.join
