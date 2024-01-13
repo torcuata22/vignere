@@ -1,0 +1,17 @@
+<h1>Decode Your Text</h1>
+
+<p>Enter the text you would like to decode in the box below. 
+Afterwards, enter the word used as the decryption key</p>
+
+<%= render 'decode_form' %>
+
+
+  <div class="card my-5">
+    <div class="card-body my-2">
+      <p class='card-title fw-bold'>Here is your decoded text:</p>
+      <p class='card-text fs-5'><%= @decoded_text %></p>
+    </div>
+  </div>
+
+
+
