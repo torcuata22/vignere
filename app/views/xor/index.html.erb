@@ -1,9 +1,43 @@
-ENCODE/DECODE/PLAY BUTTONS GO HERE
+<%= link_to "Encode", encode_xor_index_path, class:"btn btn-dark btn-lg" %>
+<%= link_to "Decode", decode_xor_index_path, class:"btn btn-dark btn-lg" %>
+PLAY
 
-<h1 class="mt-5">About the Xor Cipher</h1>
+<h1 class="mt-5">About the XOR Cipher</h1>
+
+    <p>The XOR cipher, short for Exclusive OR cipher, is a symmetric key algorithm used for encryption and decryption. It operates on the principle of the bitwise XOR (exclusive OR) operation, a fundamental concept in digital logic.</p>
+
+    <h2>How the XOR Cipher Works</h2>
+
+    <p>In the XOR operation, two bits are compared. If the bits are different, the result is set to 1; if they are the same, the result is set to 0. When applied to text, each character is represented as a series of bits, and a secret key of the same length is used for encryption and decryption.</p>
+
+    <h3>Key Aspects:</h3>
+    <ul>
+      <li><strong>Key Length:</strong> The key used in XOR encryption must be as long as the text being encrypted.</li>
+      <li><strong>Bitwise Operation:</strong> XORing the corresponding bits of the text and the key.</li>
+    </ul>
+
+    <h2>Applications</h2>
+
+    <p>The XOR cipher has been historically used in various cryptographic applications, such as:</p>
+    <ul>
+      <li><strong>One-Time Pad (OTP):</strong> XOR ciphers are at the heart of one-time pad systems, providing perfect secrecy when used with a truly random key of equal length to the message.</li>
+      <li><strong>Stream Ciphers:</strong> XOR is widely employed in stream ciphers, where it is used to encrypt a continuous stream of plaintext.</li>
+    </ul>
+
+    <h2>Learn More</h2>
+
+    <p>For a deeper understanding of XOR ciphers and their applications, explore the following resources:</p>
+    <ol>
+      <li><a href="https://en.wikipedia.org/wiki/XOR_cipher" target="_blank">The XOR Cipher</a></li>
+      <li><a href="https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/xor-bitwise-operation" target="_blank">XOR Bitwise Operation</a></li>
+    </ol>
+
+    <p>Feel free to experiment with XOR encryption using CipherCraft, and discover the fascinating world of secure communication through bitwise operations!</p>
 
 
 
 
 
-AND HERE: ENCODE/DECODE/PLAY BUTTONS GO HERE
+<%= link_to "Encode", encode_xor_index_path, class:"btn btn-dark btn-lg" %>
+<%= link_to "Decode", decode_xor_index_path, class:"btn btn-dark btn-lg" %>
+PLAY

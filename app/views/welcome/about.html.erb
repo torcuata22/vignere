@@ -1,1 +1,10 @@
-<h1>About the ciphers used in this app</h1>
+<h1>My Messages</h1>
+
+
+<h2>Bacon Cipher</h2>
+
+<% @bacons.each do |bacon| %>
+  <p>Encoded: <%= bacon.to_encode %></p>
+  <p>Decoded: <%= bacon.to_decode %></p>
+  <p>Key: <%= bacon.key %></p>
+<% end %>
