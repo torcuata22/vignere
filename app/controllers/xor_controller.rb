@@ -10,10 +10,17 @@ class XorController < ApplicationController
     if @original_text.present?
       @xor.to_encode = @original_text
       @xor.key = params[:xor][:key]
-      @xor.to_decode = perform_encoding(@original_text, @xor.key)
-      @encoded_text = @xor.to_decode
-      puts @encoded_text
-      render :encode
+
+      if valid_key?(@xor.key, @original_text)
+        @xor.to_decode = encode_decode(@original_text, @xor.key)
+        @encoded_text = @xor.to_decode
+        puts @encoded_text
+        render :encode
+      else
+        flash.now[:alert] = "Invalid key. Please choose a letter not in the text you want to encode, and make sure there are no spaces before or after the letter"
+
+      end
+
     end
     puts "Original Text: #{@original_text}"
     puts "Key: #{@xor.key}"
@@ -25,14 +32,14 @@ class XorController < ApplicationController
   def decode
     @xor = Xor.new
     @encoded_text = params.dig(:xor, :to_decode)
-    key = params.dig(:xor, :key)
+    @xor.key = params[:xor][:key] if params[:xor].present?
 
     if @encoded_text.present?
-      @xor.to_decode = perform_decoding(@encoded_text, key)
+      @xor.to_decode = encode_decode(@encoded_text, @xor.key)
       @decoded_text = @xor.to_decode
       flash[:success] = 'Text decoded successfully!'
       puts "Received encoded text: #{@encoded_text}"
-      puts "Received key: #{key}"
+      puts "Received key: #{@xor.key}"
       puts "Decoded text: #{@decoded_text}" # Add this line
       render :decode
     else
@@ -40,111 +47,47 @@ class XorController < ApplicationController
     end
   end
 
+
   private
 
-  def perform_encoding(original_text, key)
-    key = key * (original_text.length / key.length) + key[0, original_text.length % key.length]
-    encoded_text = ""
-
-    original_text.each_char.with_index do |char, index|
-      char_binary = char.ord.to_s(2).rjust(8,'0')
-      key_char = key[index]
-      key_binary = key_char.ord.to_s(2).rjust(8,'0')
-
-      encoded_char_binary = char_binary.chars.zip(key_binary.chars).map { |a, b| (a.to_i ^ b.to_i).to_s }.join
-      encoded_char = encoded_char_binary.to_i(2).chr
-      encoded_text += encoded_char
-    end
-
-    encoded_text
+  def valid_key?(key, text)
+    key.length == 1 && !text.include?(key)
   end
 
-  def perform_decoding(encoded_text, key)
-    key = key * (encoded_text.length / key.length) + key[0, encoded_text.length % key.length]
-    puts "Received encoded text: #{encoded_text}"
+  def encode_decode(text, key, encoding = true)
+    key = key.downcase
+    text = text.downcase if encoding
+
+    key = key * (text.length / key.length) + key[0, text.length % key.length]
+    puts "Received text: #{text}"
     puts "Received key: #{key}"
 
-    decoded_text = ""
-    space_flag = false
+    result_text = ""
 
-    encoded_text.each_char.with_index do |char, index|
+    text.each_char.with_index do |char, index|
       key_char = key[index]
 
-      # Handle spaces
+      # Handle spaces consistently
       if char == ' '
-        decoded_text += ' '
-        space_flag = true
+        result_text += ' '
         next
       end
 
       char_binary = char.ord.to_s(2).rjust(8, '0')
       key_binary = key_char.ord.to_s(2).rjust(8, '0')
 
-      decoded_char_binary = char_binary.chars.zip(key_binary.chars).map { |a, b| (a.to_i ^ b.to_i).to_s }.join
-      decoded_char = decoded_char_binary.to_i(2).chr
+      puts "char: #{char}, key_char: #{key_char}"
+      puts "char_binary: #{char_binary}, key_binary: #{key_binary}"
 
-      decoded_char = ' ' if space_flag
-      space_flag = false
+      result_char_binary = (char_binary.to_i(2) ^ key_binary.to_i(2)).to_s(2).rjust(8, '0')
+      result_char = [result_char_binary].pack('B*')
 
-      decoded_text += decoded_char
+      puts "result_char_binary: #{result_char_binary}, result_char: #{result_char}"
+
+      result_text += result_char
     end
 
-    puts "Decoded text: #{decoded_text}"
-    decoded_text
+    puts "Result text: #{result_text}"
+    result_text
   end
-
-
-
-
-
-
-  # def perform_decoding(encoded_text, key)
-  #   key = key * (encoded_text.length / key.length + 1)
-  #   puts "Received encoded text: #{encoded_text}"
-  #   puts "Received key: #{key}"
-
-  #   decoded_text = ""
-
-  #   encoded_text.each_char.with_index do |char, index|
-  #     key_char = key[index % key.length]
-
-  #     char_binary = char.ord.to_s(2).rjust(8, '0')
-  #     key_binary = key_char.ord.to_s(2).rjust(8, '0')
-
-  #     decoded_char_binary = char_binary.chars.zip(key_binary.chars).map { |a, b| (a.to_i ^ b.to_i).to_s }.join
-  #     decoded_char = decoded_char_binary.to_i(2).chr
-
-  #     decoded_text += decoded_char
-  #   end
-
-  #   puts "Decoded text: #{decoded_text}"
-  #   decoded_text
-  # end
-
-
-  # def perform_decoding(encoded_text, key)
-  #   # key = key * (encoded_text.length / key.length + 1)
-  #   key = key * (encoded_text.length / key.length) + key[0, encoded_text.length % key.length]
-  #   puts "Received encoded text: #{encoded_text}"
-  #   puts "Received key: #{key}"
-
-  #   decoded_text = ""
-
-  #   encoded_text.each_char.with_index do |char, index|
-  #     key_char = key[index % key.length]
-
-  #     char_binary = char.ord.to_s(2).rjust(8, '0')
-  #     key_binary = key_char.ord.to_s(2).rjust(8, '0')
-
-  #     decoded_char_binary = char_binary.chars.zip(key_binary.chars).map { |a, b| (a.to_i ^ b.to_i).to_s }.join
-  #     decoded_char = decoded_char_binary.to_i(2).chr
-
-  #     decoded_text += decoded_char
-  #   end
-
-  #   puts "Decoded text: #{decoded_text}"
-  #   decoded_text
-  # end
-
-
 end
