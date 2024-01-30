@@ -12,6 +12,7 @@ class CaesarController < ApplicationController
       @caesar.to_decode = perform_encoding(@original_text, @caesar.number)
       @encoded_text = @caesar.to_decode
       puts @encoded_text
+      save_message('encoded')
       render :encode
     end
   end
@@ -24,12 +25,22 @@ class CaesarController < ApplicationController
       @caesar.number = params[:caesar][:number]
       @caesar.to_encode = perform_decoding(@encoded_text, @caesar.number)
       @decoded_text = @caesar.to_encode
-      puts "Decoded text: #{@decoded_text}"  # Print to console
+      save_message('decoded')
       render :decode
     end
   end
 
   private
+
+  def  save_message(action)
+    @caesar.user = current_user
+
+    if @caesar.save
+      flash.now[:notice] = "Message #{action} successfully!"
+    else
+      flash.now[:alert] = "Failed to #{action} message."
+    end
+  end
 
   def perform_encoding(text, number)
     alphabet = ('a'..'z').to_a

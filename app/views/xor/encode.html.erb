@@ -1,11 +1,9 @@
 <h1>Encode Your text</h1>
 
 <p>Enter the phrase or sentence you would like to encode in the box below 
-and select a word to use as your Encryption Key.</p>
-<p>The XOR cipher, operating at the bit level (the smallest unit of digital data, representing a binary value 
-of 0 or 1), requires a larger number of bits to generate meaningful patterns. By using phrases or sentences, 
-XOR operations involve more bits, thereby increasing the likelihood of producing recognizable and meaningful 
-results during both encoding and decoding processes.</p>
+and select a letter to use as your Encryption Key.</p>
+<p>Important: Please select a letter that is not in the message you want to encode</p>
+
 
 <%= render 'encode_form' %>
 
@@ -17,3 +15,6 @@ results during both encoding and decoding processes.</p>
     </div>
   </div>
 <% end %>
+
+<p>Want to see how the decoding part works?</p>
+<%= link_to "Decode", decode_xor_index_path, class:"btn btn-dark btn-lg" %>

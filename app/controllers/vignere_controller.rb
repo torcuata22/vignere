@@ -14,10 +14,10 @@ class VignereController < ApplicationController
             @vign.to_decode = perform_encoding(@original_text, @vign.key)
             @encoded_text = @vign.to_decode
             puts "Encoded Text: #{@encoded_text}"
+            save_message('encoded')
             render :encode
 
         end
-        puts "Params: #{params.inspect}, Original Text: #{@original_text}, Key: #{@vign.key}, Encoded Text: #{@vign.to_decode}"
     end
 
 
@@ -32,18 +32,21 @@ class VignereController < ApplicationController
           flash[:success] = 'Text decoded successfully!'
           render :decode
         else
-
+          save_message('decoded') if @decoded_text.present?
           render :decode
         end
       end
 
 
-
-
-
-
-
     private
+    def save_message(action)
+      @vign.user = current_user
+      if @vign.save
+        flash.now[:notice] = "Message #{action} successfully!"
+      else
+        flash.now[:alert] = "Failed to #{action} message."
+      end
+    end
 
     def perform_encoding(text, key)
         text_length = text.length

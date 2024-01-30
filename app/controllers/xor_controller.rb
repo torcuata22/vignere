@@ -15,19 +15,15 @@ class XorController < ApplicationController
         @xor.to_decode = encode_decode(@original_text, @xor.key)
         @encoded_text = @xor.to_decode
         puts @encoded_text
+        save_message('encoded')
         render :encode
       else
         flash.now[:alert] = "Invalid key. Please choose a letter not in the text you want to encode, and make sure there are no spaces before or after the letter"
-
       end
-
     end
-    puts "Original Text: #{@original_text}"
-    puts "Key: #{@xor.key}"
-    puts "Encoded Text: #{@encoded_text}"
-
     @encoded_text
   end
+
 
   def decode
     @xor = Xor.new
@@ -43,12 +39,22 @@ class XorController < ApplicationController
       puts "Decoded text: #{@decoded_text}" # Add this line
       render :decode
     else
+      save_message('decoded') if @decoded_text.present?
       render :decode
     end
   end
 
 
   private
+
+  def save_message(action)
+    @xor.user = current_user
+    if @xor.save
+      flash.now[:notice] = "Message #{action} successfully!"
+    else
+      flash.now[:alert] = "Failed to #{action} message."
+    end
+  end
 
   def valid_key?(key, text)
     key.length == 1 && !text.include?(key)

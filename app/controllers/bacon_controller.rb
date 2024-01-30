@@ -11,6 +11,7 @@ class BaconController < ApplicationController
       @bacon.to_decode = perform_encoding(@original_text)
       @encoded_text = @bacon.to_decode
       puts @encoded_text
+      save_message('encoded')
       render :encode
     end
 
@@ -29,12 +30,29 @@ class BaconController < ApplicationController
       @decoded_text = perform_decoding(@encoded_text)
       puts "Decoded text: #{@decoded_text}"  # Print to console
     end
-
+    save_message('decoded') if @decoded_text.present?
     render :decode
   end
 
 
   private
+
+  def save_message(action)
+      @bacon.user = current_user
+
+      if action == 'encoded' && @bacon.save
+        flash.now[:notice] = "Message #{action} successfully!"
+      elsif action == 'decoded' && @decoded_text.present?
+        @bacon.to_decode = @decoded_text
+        if @bacon.save
+          flash.now[:notice] = "Message #{action} successfully!"
+        else
+          flash.now[:alert] = "Failed to #{action} message."
+        end
+      end
+  end
+
+
 
   def perform_encoding(original_text)
     bacon_map = {
