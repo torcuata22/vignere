@@ -30,7 +30,17 @@ class CaesarController < ApplicationController
     end
   end
 
+  def destroy
+    @caesar = Caesar.find(params[:id])
+    @caesar.destroy
+    redirect_to about_path, notice: 'Message deleted successfully!'
+  end
+
   private
+
+  def caesar_params
+    params.require(:caesar).permit(:id)
+  end
 
   def  save_message(action)
     @caesar.user = current_user

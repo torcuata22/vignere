@@ -1,10 +1,172 @@
-<h1>My Messages</h1>
+<h1 class="mb-5">My Messages</h1>
 
 
-<h2>Bacon Cipher</h2>
+<div class="accordion" id="baconAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="baconHeader">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#baconCollapse" aria-expanded="true" aria-controls="baconCollapse">
+        <h2>Bacon Messages</h2>
+      </button>
+    </h2>
+    <div id="baconCollapse" class="accordion-collapse collapse show" aria-labelledby="baconHeader" data-bs-parent="#baconAccordion">
+      <div class="accordion-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Encoded Text</th>
+              <th scope="col">Decoded Text</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+              <% @bacons.each do |bacon| %>
+                <tr>
+                <td><%= bacon.to_decode %></td>
+                <td><%= bacon.to_encode %></td>
+                <td>
+                  <%= form_with(model: bacon, url: url_for(controller: 'bacon', action: 'destroy', id: bacon), method: :delete, data: { confirm: "Are you sure?" }) do |form| %>
+                    <%= form.button type: :submit, class: "btn btn-sm btn-danger", "data-disable-with": "Deleting..." do %>
+                      Delete</td>
+                    <% end %>
+                  <% end %>
+                
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
 
-<% @bacons.each do |bacon| %>
-  <p>Encoded: <%= bacon.to_encode %></p>
-  <p>Decoded: <%= bacon.to_decode %></p>
-  <p>Key: <%= bacon.key %></p>
-<% end %>
+       </div>
+    </div>
+  </div>
+</div>
+
+    
+
+<div class="accordion" id="baconAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="baconHeader">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#baconCollapse" aria-expanded="true" aria-controls="baconCollapse">
+        <h2>Caesar Messages</h2>
+      </button>
+    </h2>
+    <div id="baconCollapse" class="accordion-collapse collapse show" aria-labelledby="baconHeader" data-bs-parent="#baconAccordion">
+      <div class="accordion-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Encoded Text</th>
+              <th scope="col">Decoded Text</th>
+              <th scope="col">Numerical key</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @caesars.each do |caesar| %>
+              <tr>
+                <td><%= caesar.to_decode %></td>
+                <td><%= caesar.to_encode %></td>
+                <td><%= caesar.number %></td>
+                <td>
+                  <%= form_with(model: caesar, url: url_for(controller: 'caesar', action: 'destroy', id: caesar), method: :delete, data: { confirm: "Are you sure?" }) do |form| %>
+                    <%= form.button type: :submit, class: "btn btn-sm btn-danger", "data-disable-with": "Deleting..." do %>
+                      Delete
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+
+<div class="accordion" id="baconAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="baconHeader">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#baconCollapse" aria-expanded="true" aria-controls="baconCollapse">
+        <h2>Vignere Messages</h2>
+      </button>
+    </h2>
+    <div id="baconCollapse" class="accordion-collapse collapse show" aria-labelledby="baconHeader" data-bs-parent="#baconAccordion">
+      <div class="accordion-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Encoded Text</th>
+              <th scope="col">Decoded Text</th>
+              <th scope="col">Encryption key</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+        <% @vigns.each do |vign| %>
+          <td><%= vign.to_decode %></td>
+          <td><%= vign.to_encode %></td>
+          <td><%= vign.key %></td>
+          <td>
+                  <%= form_with(model: vign, url: url_for(controller: 'vignere', action: 'destroy', id: vign), method: :delete, data: { confirm: "Are you sure?" }) do |form| %>
+                    <%= form.button type: :submit, class: "btn btn-sm btn-danger", "data-disable-with": "Deleting..." do %>
+                      Delete
+                    <% end %>
+                  <% end %>
+                </td>
+            </tr>  
+        <% end %>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+
+
+<div class="accordion" id="baconAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="baconHeader">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#baconCollapse" aria-expanded="true" aria-controls="baconCollapse">
+        <h2>XOR Messages</h2>
+      </button>
+    </h2>
+    <div id="baconCollapse" class="accordion-collapse collapse show" aria-labelledby="baconHeader" data-bs-parent="#baconAccordion">
+      <div class="accordion-body">
+
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Encoded Text</th>
+              <th scope="col">Decoded Text</th>
+              <th scope="col">Encryption key</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+        <% @xors.each do |xor| %>
+          <td><%= xor.to_decode %></td>
+          <td><%= xor.to_encode %></td>
+          <td><%= xor.key %></td>
+          <td>
+            <%= form_with(model: xor, url: url_for(controller: 'xor', action: 'destroy', id: xor), method: :delete, data: { confirm: "Are you sure?" }) do |form| %>
+              <%= form.button type: :submit, class: "btn btn-sm btn-danger", "data-disable-with": "Deleting..." do %>
+                Delete
+              <% end %>
+            <% end %>
+          </td>
+            </tr>  
+        <% end %>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+

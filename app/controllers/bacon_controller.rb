@@ -34,8 +34,18 @@ class BaconController < ApplicationController
     render :decode
   end
 
+  def destroy
+    @bacon = Bacon.find(params[:id])
+    @bacon.destroy
+    redirect_to about_path, notice: 'Message deleted successfully!'
+  end
+
 
   private
+
+  def bacon_params
+    params.require(:bacon).permit(:id)
+  end
 
   def save_message(action)
       @bacon.user = current_user

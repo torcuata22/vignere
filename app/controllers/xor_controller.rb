@@ -44,8 +44,18 @@ class XorController < ApplicationController
     end
   end
 
+  def destroy
+    @xor = Xor.find(params[:id])
+    @xor.destroy
+    redirect_to about_path, notice: 'Message deleted successfully!'
+  end
+
 
   private
+
+  def xor_params
+    params(:xor).permit(:id)
+  end
 
   def save_message(action)
     @xor.user = current_user

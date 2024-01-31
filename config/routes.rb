@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root "welcome#index"
   get "/about", to: "welcome#about"
 
-  resources :vignere, only: [:index]  do
+  resources :vignere, only: [:index, :destroy]  do
     collection do
       get :encode
       get :decode
@@ -14,16 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :caesar, only: [:index]  do
-    collection do
-      get :encode
-      post :encode
-      get :decode
-      post :decode
-    end
-  end
-
-  resources :bacon, only: [:index]  do
+  resources :caesar, only: [:index, :destroy]  do
     collection do
       get :encode
       post :encode
@@ -32,7 +23,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :xor, only: [:index]  do
+  resources :bacon, only: [:index, :destroy]  do
+    collection do
+      get :encode
+      post :encode
+      get :decode
+      post :decode
+
+    end
+  end
+
+  resources :xor, only: [:index, :destroy]  do
     collection do
       get :encode
       post :encode

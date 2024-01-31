@@ -37,8 +37,20 @@ class VignereController < ApplicationController
         end
       end
 
+    def destroy
+      @vign = Vign.find(params[:id])
+      @vign.destroy
+      redirect_to about_path, notice: 'Message deleted successfully!'
+    end
+
 
     private
+
+    def vign_params
+      params.require(:vign).permit(:id)
+    end
+
+
     def save_message(action)
       @vign.user = current_user
       if @vign.save
