@@ -11,18 +11,12 @@
         <li class="nav-item">
           <%= link_to "Home", root_path, class: "nav-link mx-2" %>
         </li>
+        <% if current_user %>
         <li class="nav-item">
           <%= link_to "My Messages", about_path, class: "nav-link mx-2" %>
         </li>
-        <!-- User authentication -->
-        <li class="nav-item">
-          <% if current_user %>
-            <%= link_to 'Logout', destroy_user_session_path, class: "nav-link mx-2", data: { turbo_method: :delete } %>
-          <% else %>
-            <%= link_to 'Login', new_user_session_path, class: 'nav-link mx-2' %>
-            
-          <% end %>
-        </li>
+        <% end %>
+
         <!-- Ciphers dropdown -->
         <% if current_user %>
           <li class="nav-item dropdown">
@@ -38,6 +32,17 @@
             </ul>
           </li>
         <% end %>
+
+                <!-- User authentication -->
+        <li class="nav-item">
+          <% if current_user %>
+            <%= link_to 'Logout', destroy_user_session_path, class: "nav-link mx-2", data: { turbo_method: :delete } %>
+          <% else %>
+            <%= link_to 'Login', new_user_session_path, class: 'nav-link mx-2' %>
+          <% end %>
+        </li>
+
+        
       </ul>
     </div>
   </div>

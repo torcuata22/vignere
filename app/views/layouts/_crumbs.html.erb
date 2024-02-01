@@ -1,0 +1,18 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <% @breadcrumbs.each_with_index do |crumb, index| %>
+      <% unless current_page?(crumb[:path]) %>
+        <% if index.positive? && crumb[:path].present? %>
+          <li class="breadcrumb-item"></li>
+        <% end %>
+        <li class="breadcrumb-item">
+          <% if crumb[:path] %>
+            <%= link_to crumb[:name], crumb[:path] %>
+          <% else %>
+            <%= crumb[:name] %>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ol>
+</nav>

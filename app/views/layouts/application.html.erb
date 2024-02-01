@@ -12,8 +12,9 @@
 
   <body>
   <%= render 'layouts/navigation' %>
+  
   <main class="container mx-auto mt-28 px-5 flex">
-
+ 
     <% if notice.present? %>
       <div class="alert alert-success alert-dismissible" role="alert" id="flash-notice">
         <%= notice %>

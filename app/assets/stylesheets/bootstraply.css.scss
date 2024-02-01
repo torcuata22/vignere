@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+p {
+    font-size:larger
+}
+
 .navbar {
     background-color: #2d3436 !important;
 }
@@ -15,5 +19,17 @@
 .nav-link {
     color: #fff7f4 !important;
     font-size: 1.6rem;
+    font-family: monospace;
+}
+
+
+/* Custom class for the accordion button */
+.fan {
+    background-color: #2d3436 !important;
+    color: #fff7f4 !important;
+    font-family: monospace;
+  }
+  
+.title {
     font-family: monospace;
 }
