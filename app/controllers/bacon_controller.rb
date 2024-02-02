@@ -1,8 +1,13 @@
 class BaconController < ApplicationController
   def index
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'Bacon Cipher', bacon_index_path
   end
 
   def encode
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'Bacon Cipher', bacon_index_path
+    add_breadcrumb 'Bacon Cipher Encode', encode_bacon_index_path
     @bacon = Bacon.new
     @original_text = params[:bacon][:to_encode].upcase if params[:bacon].present?
 
@@ -18,6 +23,9 @@ class BaconController < ApplicationController
   end
 
   def decode
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'Bacon Cipher', bacon_index_path
+    add_breadcrumb 'Bacon Cipher Encode', decode_bacon_index_path
     @bacon = Bacon.new
     @encoded_text = params[:bacon][:to_decode] if params[:bacon].present?
 
@@ -30,7 +38,6 @@ class BaconController < ApplicationController
       @decoded_text = perform_decoding(@encoded_text)
       puts "Decoded text: #{@decoded_text}"  # Print to console
     end
-    save_message('decoded') if @decoded_text.present?
     render :decode
   end
 

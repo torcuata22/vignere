@@ -1,13 +1,13 @@
 class WelcomeController < ApplicationController
   before_action :set_breadcrumbs, only: [:index, :about]
 
-
-
   def index
-
+    add_breadcrumb "Home", :root_path
   end
 
   def about
+    add_breadcrumb "Home", :root_path
+    add_breadcrumb "My Messages", :about_path
     @user = current_user
     @bacons = @user.bacons
     @caesars = @user.caesars

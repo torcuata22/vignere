@@ -1,8 +1,15 @@
 class CaesarController < ApplicationController
   def index
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'Caesar Cipher', caesar_index_path
+
   end
 
   def encode
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'Caesar Cipher', caesar_index_path
+    add_breadcrumb 'Caesar Cipher Encode', encode_caesar_index_path
+
     @caesar = Caesar.new
     @original_text = params[:caesar][:to_encode] if params[:caesar].present?
 
@@ -18,6 +25,10 @@ class CaesarController < ApplicationController
   end
 
   def decode
+
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'Caesar Cipher', caesar_index_path
+    add_breadcrumb 'Caesar Cipher Decode', decode_caesar_index_path
     @caesar = Caesar.new
     @encoded_text = params[:caesar][:to_decode] if params[:caesar].present?
     if @encoded_text.present?
@@ -25,7 +36,6 @@ class CaesarController < ApplicationController
       @caesar.number = params[:caesar][:number]
       @caesar.to_encode = perform_decoding(@encoded_text, @caesar.number)
       @decoded_text = @caesar.to_encode
-      save_message('decoded')
       render :decode
     end
   end

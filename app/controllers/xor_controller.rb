@@ -1,9 +1,15 @@
 class XorController < ApplicationController
 
   def index
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'XOR Cipher', xor_index_path
   end
 
   def encode
+
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'XOR Cipher', xor_index_path
+    add_breadcrumb 'XOR Cipher Encode', encode_xor_index_path
     @xor = Xor.new
     @original_text = params[:xor][:to_encode] if params[:xor].present?
 
@@ -26,6 +32,9 @@ class XorController < ApplicationController
 
 
   def decode
+    add_breadcrumb 'Home', root_path
+    add_breadcrumb 'XOR Cipher', vignere_index_path
+    add_breadcrumb 'XOR Cipher Decode', decode_vignere_index_path
     @xor = Xor.new
     @encoded_text = params.dig(:xor, :to_decode)
     @xor.key = params[:xor][:key] if params[:xor].present?
@@ -34,12 +43,9 @@ class XorController < ApplicationController
       @xor.to_decode = encode_decode(@encoded_text, @xor.key)
       @decoded_text = @xor.to_decode
       flash[:success] = 'Text decoded successfully!'
-      puts "Received encoded text: #{@encoded_text}"
-      puts "Received key: #{@xor.key}"
-      puts "Decoded text: #{@decoded_text}" # Add this line
       render :decode
     else
-      save_message('decoded') if @decoded_text.present?
+
       render :decode
     end
   end

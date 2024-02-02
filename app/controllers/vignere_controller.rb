@@ -1,47 +1,55 @@
 class VignereController < ApplicationController
 
     def index
+      add_breadcrumb 'Home', root_path
+      add_breadcrumb 'Vignere Cipher', vignere_index_path
 
     end
 
     def encode
-        @vign = Vign.new
-        @original_text = params[:vign][:to_encode] if params[:vign].present?
+      add_breadcrumb 'Home', root_path
+      add_breadcrumb 'Vignere Cipher', vignere_index_path
+      add_breadcrumb 'Vignere Cipher Encode', encode_vignere_index_path
 
-        if @original_text.present?
-            @vign.to_encode = @original_text
-            @vign.key = params[:vign][:key]
-            @vign.to_decode = perform_encoding(@original_text, @vign.key)
-            @encoded_text = @vign.to_decode
-            puts "Encoded Text: #{@encoded_text}"
-            save_message('encoded')
-            render :encode
+      @vign = Vign.new
+      @original_text = params[:vign][:to_encode] if params[:vign].present?
 
-        end
+      if @original_text.present?
+          @vign.to_encode = @original_text
+          @vign.key = params[:vign][:key]
+          @vign.to_decode = perform_encoding(@original_text, @vign.key)
+          @encoded_text = @vign.to_decode
+          puts "Encoded Text: #{@encoded_text}"
+          save_message('encoded')
+          render :encode
+
+      end
     end
 
 
     def decode
-        @vign = Vign.new
-        encoded_text = params.dig(:vign, :to_decode)
-        key = params.dig(:vign, :key)
+      add_breadcrumb 'Home', root_path
+      add_breadcrumb 'Vignere Cipher', vignere_index_path
+      add_breadcrumb 'Vignere Cipher Decode', decode_vignere_index_path
+      @vign = Vign.new
+      encoded_text = params.dig(:vign, :to_decode)
+      key = params.dig(:vign, :key)
 
-        if encoded_text.present?
-          @vign.to_decode = perform_decoding(encoded_text, key)
-          @decoded_text = @vign.to_decode
-          flash[:success] = 'Text decoded successfully!'
-          render :decode
-        else
-          save_message('decoded') if @decoded_text.present?
-          render :decode
-        end
+      if encoded_text.present?
+        @vign.to_decode = perform_decoding(encoded_text, key)
+        @decoded_text = @vign.to_decode
+        flash[:success] = 'Text decoded successfully!'
+        render :decode
+      else
+        render :decode
       end
-
-    def destroy
-      @vign = Vign.find(params[:id])
-      @vign.destroy
-      redirect_to about_path, notice: 'Message deleted successfully!'
     end
+
+  def destroy
+    @vign = Vign.find(params[:id])
+    @vign.destroy
+    redirect_to about_path, notice: 'Message deleted successfully!'
+  end
 
 
     private
