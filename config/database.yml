@@ -29,6 +29,6 @@ test:
 
 production:
   <<: *default
-  database: vignere_production
-  username: vignere
+  database: ciphercraft_production
+  username: ciphercraft_user
   password: <%=ENV['VIGNERE_DATABASE_PASSWORD'] %>
