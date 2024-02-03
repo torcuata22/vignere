@@ -10,14 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_02_194509) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_12_022004) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bacons", force: :cascade do |t|
     t.string "to_encode"
     t.string "to_decode"
     t.string "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_bacons_on_user_id"
   end
 
@@ -25,9 +28,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_194509) do
     t.string "to_encode"
     t.string "to_decode"
     t.integer "number"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["user_id"], name: "index_caesars_on_user_id"
   end
 
@@ -47,7 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_194509) do
     t.string "to_encode"
     t.string "to_decode"
     t.string "key"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_vigns_on_user_id"
@@ -57,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_194509) do
     t.string "to_encode"
     t.string "to_decode"
     t.string "key"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_xors_on_user_id"
